@@ -1,0 +1,157 @@
+# -------------------------------
+# 	LPS Example
+#
+# 	Ricorsione 3
+#
+#	Language: MIPS32-MARS
+#	Style: plain MIPS32
+# 	Version: LPS23-1-mips
+# -------------------------------
+
+#  Plain MIPS32 Solution
+
+# Questo esempio mostra la traduzione in ASM di un programma C
+# contenente una funzione ricorsiva. Nella funzione ricorsiva:
+# - prima di fare la successiva chiamata ricorsiva è necessario
+#	modificare il parametro per calcolare l'argomento di tale chiamata
+# - dopo il ritorno dalla successiva chiamata ricorsiva è necessario
+#	il valore originale del parametro
+# Di conseguenza, in ogni attivazione della funzione ricorsiva,
+# prima di eseguire ricorsivamente la successiva attivazione, è
+# necessario salvare il valore del parametro per poi ripristinarlo
+# al ritorno da tale attivazione. Il salvataggio deve essere fatto
+# necessariamente nello stack; altrimenti se si usasse memoria allocata
+# staticamente, il valore salvato verrebbe sovrascritto dalle
+# attivazioni successive.
+# Vengono realizzate 2 traduzioni ASM:
+# 1)	il parametro e il risultato vengono passati attraverso registri.
+#	Nonostante tale semplicità, è comunque necessario usare lo stack
+#	per salvare e ripristinare:
+#	- l'indirizzo di ritorno della routine (gestito automaticamente 
+#		in MC68000)
+#	- il valore del parametro della attivazione corrente
+# 2)	il parametro e il risultato vengono passati attraverso lo stack
+
+# Questo esempio e' realizzato per l'assembler MARS
+# Per eseguire il programma si possono usare i comandi della GUI
+
+# Variabili
+# il tipo int viene memorizzato con word
+	.data
+
+# la word seguente contiene il valore che la versione Plain C
+# legge da standard input
+t:	.word	10
+
+# la word seguente, al termine del programma contiene il
+# valore che la versione Plain C stampa su standard output
+r:	.word	0
+
+# Programma
+	.text
+
+inizio_codice:
+
+# Routine main
+main:
+	# input
+	# la lettura mediante scanf della versione Plain C
+	# viene simulata dalla lettura della word a indirizzo t
+	lw	$s0,t
+	
+	# calcolo
+	move	$a0,$s0
+	jal	f
+	move	$s1,$v0
+		
+	# output
+	# la scrittura mediante printf della versione Plain C
+	# viene simulata dalla scrittura della word a indirizzo r
+	sw	$s1,r
+
+fine_main:
+
+	# fine programma
+	j	fine_codice
+
+# Routine f
+# Input
+#	a0 (word) - parametro x
+# Output
+#	v0 (word) - risultato
+# Registri che risultano modificati al termine dell'esecuzione
+#	v0
+# Stack frame
+# offset da indirizzo	| contenuto	| note
+# area stack frame	|		|
+#			|		|
+#	0		| ind. ritorno	| allocato da f
+#			| chiamante	|
+#	4		| input		| allocato da f
+#			| 		|
+#----------------------------------------------------------------------
+# dimensione stack frame: 8
+
+	.eqv	f_stack_ra 0
+	.eqv	f_stack_a0 4
+	.eqv	f_stack_size 8
+f:
+	blt	$a0,1,f_base
+
+	# push di ra e a0 nello stack
+	sub	$sp,$sp,f_stack_size
+	sw	$ra,($sp)
+	sw	$a0,f_stack_a0($sp)
+	
+	div	$a0,$a0,3
+	jal	f
+	# $v0 contiene il risultato
+
+	# pop dallo stack di ra e a0
+	lw	$ra,($sp)
+	lw	$a0,f_stack_a0($sp)
+	add	$sp,$sp,f_stack_size
+
+	# termina calcolo
+	sub	$v0,$v0,$a0
+	jr	$ra
+
+f_base:
+	li	$v0,1
+	jr	$ra
+
+fine_codice:
+
+#	Test Cases
+#
+#	Test 1
+#	input: 0
+#	output: 1
+#
+#	Test 2
+#	input: 1
+#	output: 0
+#
+#	Test 3
+#	input: 2
+#	output: -1
+#
+#	Test 4
+#	input: 10
+#	output: -13
+#
+#	Test 5
+#	input: 35
+#	output: -49
+#
+#	Test 6
+#	input: 64
+#	output: -93
+#
+#	Test 7
+#	input: 320
+#	output: -475
+#
+#	Test 8
+#	input: 4096
+#	output: -6138
