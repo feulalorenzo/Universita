@@ -100,7 +100,7 @@ f:
 
 	# push di ra e a0 nello stack
 	sub	$sp,$sp,f_stack_size
-	sw	$ra,($sp)
+	sw	$ra,f_stack_ra($sp)
 	sw	$a0,f_stack_a0($sp)
 	
 	div	$a0,$a0,3
