@@ -1,0 +1,23 @@
+
+	Clash of Univaq
+
+Seleziona la modalita' di gioco:
+
+1: Player vs Player.
+2: Player vs Computer.
+3: Caricare una partita salvata.
+4: Guarda le statistiche delle partite passate.
+5: Leggi le regole del gioco.
+0: Esci dal gioco.
+
+Nome giocatore 1: 
+Stai per giocare contro il computer.
+
+La partita sta per cominciare!
+
+siummete, e' il tuo turno, cosa vuoi fare?
+1: Schiera e/o attacca.
+2: Passa il turno.
+3: Indietro di una mossa.
+4: Salva partita ed esci.
+5: Esci senza salvare.
