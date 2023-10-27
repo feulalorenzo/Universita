@@ -1,0 +1,8 @@
+Nome; Cognome; Età
+
+Pippo; Rossi; 35
+Carlo; Bianchi; 36
+Pluto; Rossi; 20
+Pippo; Giallo; 44
+Pasquale; Verdone; 31
+Rosalia; Rosa; 28

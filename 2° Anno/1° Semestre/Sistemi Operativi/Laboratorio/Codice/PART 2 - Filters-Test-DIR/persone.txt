@@ -1,0 +1,8 @@
+Nome; Cognome; Età
+
+#Mario; Rossi; 32
+Mario; Bianchi; 36
+#Paolo; Rossi; 20
+Pippo; Verdi; 44
+Pluto; Verdone; 22
+Minnie; Rosa; 28
