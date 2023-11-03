@@ -1,10 +1,9 @@
-totale 32
-drwxrwxr-x 3 lorycat22 lorycat22  4096 nov  2 16:16 .
-drwxrwxr-x 7 lorycat22 lorycat22  4096 nov  2 15:35 ..
--rw-rw-r-- 1 lorycat22 lorycat22     0 nov  2 11:52 0
--rw-rw-r-- 1 lorycat22 lorycat22     0 nov  2 11:52 0]
-drwxrwxr-x 3 lorycat22 lorycat22  4096 nov  2 12:00 cartella
--rw-rw-r-- 1 lorycat22 lorycat22     0 nov  2 16:16 filelist
--rw-rw-r-- 1 lorycat22 lorycat22    22 nov  2 15:53 froggen
+totale 36
+drwxrwxr-x 4 lorycat22 lorycat22  4096 nov  3 11:17 .
+drwxrwxr-x 7 lorycat22 lorycat22  4096 nov  3 10:50 ..
+drwxrwxr-x 3 lorycat22 lorycat22  4096 nov  3 11:14 cartella
+-rw-rw-r-- 1 lorycat22 lorycat22     0 nov  3 11:20 filelist
+-rw-rw-r-- 1 lorycat22 lorycat22    22 nov  3 11:14 froggen
 -rw-rw-r-- 1 lorycat22 lorycat22    63 ott 27 11:31 info
 -rw-r--r-- 1 lorycat22 lorycat22 12288 ott 27 11:30 .info.swp
+drwxrwxr-x 2 lorycat22 lorycat22  4096 nov  3 11:09 shells
