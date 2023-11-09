@@ -1,0 +1,78 @@
+    
+    /************************************************************************************
+     *   			HOMEWORK
+     * Riscrivere il metodo equals() interno alla classe SinglyLinkeList<E>
+     * per confrontare questa lista con un altro oggetto di tipo SinglyLinkeList<E>: 
+     * due liste sono uguali se contengono oggetti uguali nel medesimo ordine.
+     * 
+     * Override the equals() method inside the SinglyLinkeList<E> class
+     * to compare this list with another object of type SinglyLinkeList<E>:
+     * two lists are equal if they contain equal objects in the same order.
+     * 
+     * 
+     ************************************************************************************/
+  
+    
+    
+    /*** 1) Soluzione iterativa ***/
+    
+
+    public boolean equals(Object obj) {
+ 	   if (this == obj) return true;
+ 	   if (obj == null) return false;
+ 	   if (!(obj instanceof SinglyLinkedList<?>)) return false; 
+ 	   SinglyLinkedList<?> otherList = (SinglyLinkedList<?>)obj;
+ 	   //confronto delle size
+ 	   if (size != otherList.size()) return false;
+ 	   //iterazione delle liste in parallelo
+ 	   Iterator<E> itr1 = this.iterator();
+ 	   Iterator<?> itr2 = otherList.iterator();
+ 	   while (itr1.hasNext()) {
+ 		   if (!itr1.next().equals(itr2.next())) return false;
+ 	   }
+ 	   return true;
+    }
+
+    
+    /*** 2) Soluzione ricorsiva ***/
+    
+ 
+    public boolean equals(Object obj) {
+       if (this == obj) return true;
+       if (obj == null) return false;
+       if (!(obj instanceof SinglyLinkedList<?>)) return false; 
+       SinglyLinkedList<?> otherList = (SinglyLinkedList<?>)obj;
+       //confronto delle size
+       if (size != otherList.size()) return false;
+       else return equals(this.head, (Node<?>)otherList.head);
+    }
+
+    private boolean equals(Node<?> n1, Node<?> n2) {
+ 	 //NB precondizione verificata a monte: le size delle liste coincidono  
+       if (n1 == null && n2 == null) return true; 
+       // passo ricorsivo
+       if ( ! ((n1.data).equals(n2.data)) ) return false;
+       else return equals(n1.next, n2.next);
+    }
+    
+    
+   /*** 3) Soluzione ricorsiva inefficiente estesa al confronto di questa lista con un altro oggetto di tipo List<E> ***/
+    
+    @Override
+    public boolean equals(Object obj) {  //inefficiente
+ 	      if (this == obj) return true;
+ 	      if (obj == null) return false;
+ 	      if (!(obj instanceof List<?>)) return false; 
+ 	      //confronto delle size
+ 	      if (size != ((List<?>)obj).size()) return false;
+ 	      boolean risposta;
+ 	      List<E> otherList = (List<E>)obj;
+ 	      E item1 = this.removeFirst();
+ 	      E item2 = otherList.remove(0);  //removeFirst() è solo in LinkedList
+ 	      if (!this.isEmpty()) risposta = item1.equals(item2) && this.equals(otherList); 
+ 	      else risposta = item1.equals(item2);
+ 	      
+ 	      this.add(0,item1);  
+ 	      otherList.add(0,item2);
+ 	      return risposta;
+ 	}
