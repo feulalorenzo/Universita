@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Users/feula/Documents/Università/Tirocinio/Programmazione Competitiva",
-      "program": "c:/Users/feula/Documents/Università/Tirocinio/Programmazione Competitiva/build/Debug/outDebug",
+      "cwd": ".",
+      "program": "build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
